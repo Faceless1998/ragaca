@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: black;
+            margin: 0;
+            padding: 0;
+        }
+        #preloader{
+            width: 100%;
+            height: 100vh;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <div id="preloader">
+        <div class="santa-wrapper">
+            <img src="assets/c0bbe7222de985ea39195ba96ed15a30.gif" alt="Santa Claus">
+        </div>
+        <div>
+            Happy New Year
+        </div>
+    </div>
+
+    <div class="content" id="content">
+
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function (){
+            let preloader = document.getElementById("preloader");
+            let content = document.getElementById("content");
+
+            if(preloader){
+                setTimeout(()=>{
+                    preloader.remove();
+                    content.style.display = "block";
+                },3000)
+            }
+
+        });
+
+        var requestAnimationFrame =
+        window.requestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.msRequestAnimationFrame;
+
+        var transforms = [
+            "transform",
+            "msTransform",
+            "webkitTransform",
+            "mozTransform",
+            "oTransform"
+        ];
+
+        var snowflakes = [];
+
+
+        var browserWidth;
+        var browserHeight;
+
+        var numberOfSnowflakes = 50;
+
+        var transformProperty = getSupportedPropertyName(transforms);
+
+        var resetPosition = false;
+
+        function setup(){
+            window.addEventListener("DOMContentLoaded", generateSnowflakes, false);
+            window.addEventListener("resize", setResetFlag, false);
+        }
+
+        setup();
+
+        function getSupportedPropertyName(properties){
+            for(var i =0;i<properties.length;i++){
+                if(typeof document.body.style[properties[i]] != "undefined"){
+                    return properties[i];
+                }
+            }
+            return null;
+        }
+
+        function Snowflake(element, speed,xPos,yPos){
+            this.element = element;
+            this.speed = speed;
+            this.xPos = xPos;
+            this.yPos = yPos;
+
+            this.counter = 0;
+            this.sign = Math.random()< 0.5 ? 1 : -1;
+            
+            this.element.style.opacity = 0.1 + Math.random();
+            this.element.style.fontSize = 14 + Math.random() * 50+"px";
+
+        }
+
+    </script>
+</body>
+</html>
